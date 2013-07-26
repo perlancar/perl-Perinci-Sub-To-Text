@@ -67,7 +67,6 @@ sub before_gen_doc {
         unless $self->{_info}{type} eq 'function';
 
     $res = $self->_pa->request(meta=>$self->{url});
-    use Data::Dump; dd $self->{url}, $res;
     if ($res->[0] == 200) {
         $self->{_meta} = $res->[2];
         $self->{_orig_meta} = $res->[3]{orig_meta};

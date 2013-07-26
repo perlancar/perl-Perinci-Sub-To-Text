@@ -1,5 +1,5 @@
-package Perinci::To::PackageBase::I18N::id;
-use base 'Perinci::To::PackageBase::I18N';
+package Perinci::Sub::To::FuncBase::I18N::id;
+use base 'Perinci::Sub::To::FuncBase::I18N';
 
 use Locale::Maketext::Lexicon::Gettext;
 our %Lexicon = %{ Locale::Maketext::Lexicon::Gettext->parse(<DATA>) };
