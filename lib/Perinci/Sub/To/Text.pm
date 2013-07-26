@@ -52,12 +52,12 @@ sub after_gen_doc {
             ));
             if ($ra->{summary} || $ra->{description}) {
                 $arg_has_ct++;
-                $self->inc_doc_indent;
-                $self->add_doc_lines("", $ra->{summary}) if $ra->{summary};
+                $self->inc_doc_indent(2);
+                $self->add_doc_lines($ra->{summary}.".") if $ra->{summary};
                 if ($ra->{description}) {
                     $self->add_doc_lines("", $ra->{description});
                 }
-                $self->dec_doc_indent;
+                $self->dec_doc_indent(2);
             }
         }
     }
@@ -67,7 +67,7 @@ sub after_gen_doc {
             "This function dies on error."), "");
     }
 
-    $self->add_doc_lines("", $self->loc("Return value") . ':', "");
+    $self->add_doc_lines("", $self->loc("Return value") . ':');
     $self->inc_doc_indent;
     my $rn = $ometa->{result_naked} // $meta->{result_naked};
     $self->add_doc_lines($self->loc(join(
@@ -83,7 +83,6 @@ sub after_gen_doc {
     $self->dec_doc_indent;
 
     $self->dec_doc_indent;
-    $self->add_doc_lines("");
 }
 
 1;
