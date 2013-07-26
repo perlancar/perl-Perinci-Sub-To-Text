@@ -1,0 +1,9 @@
+Revision history for Perinci-Sub-To-Text
+
+0.20     2013-07-26 (SHARYANTO) (not yet released)
+
+         First release. Extracted from Perinci-To-Text to allow generating
+         documentation for a specific function only (and not the whole package).
+         Version number starts from 0.20 because some modules are moved here.
+
+
