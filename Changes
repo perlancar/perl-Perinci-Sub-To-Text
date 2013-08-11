@@ -1,5 +1,11 @@
 Revision history for Perinci-Sub-To-Text
 
+0.24     2013-08-11 (SHARYANTO)
+
+         - Prefix internal attributes with '_doc' to avoid clashes (e.g. with
+           Perinci::CmdLine's _res).
+
+
 0.23     2013-08-11 (SHARYANTO)
 
          - No functional changes. Update log statement.
