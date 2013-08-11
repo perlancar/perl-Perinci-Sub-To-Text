@@ -56,7 +56,7 @@ sub before_gen_doc {
     # let's retrieve the metadatas first, skip if already provided in _meta
     return if $self->{_meta};
 
-    $log->tracef("=> FuncBase's before_generate_doc(opts=%s)", \%opts);
+    $log->tracef("=> FuncBase's before_gen_doc(opts=%s)", \%opts);
 
     my $res = $self->_pa->request(info=>$self->{url});
     $res->[0] == 200 or die "Can't info $self->{url}: $res->[0] - $res->[1]";
