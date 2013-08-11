@@ -51,27 +51,27 @@ sub before_gen_doc {
     $self->{url} or die "Please specify url";
 
     # initialize hash to store [intermediate] result
-    $self->{_res} = {};
+    $self->{_doc_res} = {};
 
     # let's retrieve the metadatas first, skip if already provided in _meta
-    return if $self->{_meta};
+    return if $self->{_doc_meta};
 
     $log->tracef("=> FuncBase's before_gen_doc(opts=%s)", \%opts);
 
     my $res = $self->_pa->request(info=>$self->{url});
     $res->[0] == 200 or die "Can't info $self->{url}: $res->[0] - $res->[1]";
-    $self->{_info} = $res->[2];
-    #$log->tracef("info=%s", $self->{_info});
+    $self->{_doc_info} = $res->[2];
+    #$log->tracef("info=%s", $self->{_doc_info});
 
-    die "url must be a function entity, not $self->{_info}{type} ($self->{url})"
-        unless $self->{_info}{type} eq 'function';
+    die "url must be a function entity, not $self->{_doc_info}{type} ($self->{url})"
+        unless $self->{_doc_info}{type} eq 'function';
 
     $res = $self->_pa->request(meta=>$self->{url});
     if ($res->[0] == 200) {
-        $self->{_meta} = $res->[2];
-        $self->{_orig_meta} = $res->[3]{orig_meta};
-        #$log->tracef("meta=%s", $self->{_meta});
-        #$log->tracef("orig_meta=%s", $self->{_orig_meta});
+        $self->{_doc_meta} = $res->[2];
+        $self->{_doc_orig_meta} = $res->[3]{orig_meta};
+        #$log->tracef("meta=%s", $self->{_doc_meta});
+        #$log->tracef("orig_meta=%s", $self->{_doc_orig_meta});
     }
 }
 
@@ -98,9 +98,9 @@ sub gen_doc_section_summary {
 
     my $name;
     my $summary = "";
-    if ($self->{_meta}) {
-        $name    = $self->langprop($self->{_meta}, "name");
-        $summary = $self->langprop($self->{_fmeta}, "summary");
+    if ($self->{_doc_meta}) {
+        $name    = $self->langprop($self->{_doc_meta}, "name");
+        $summary = $self->langprop($self->{_doc_fmeta}, "summary");
     }
     $name //= do {
         my $fname = $self->{url};
@@ -108,21 +108,21 @@ sub gen_doc_section_summary {
         $fname;
     };
 
-    $self->{_res}{name}    = $name;
-    $self->{_res}{summary} = $summary;
+    $self->{_doc_res}{name}    = $name;
+    $self->{_doc_res}{summary} = $summary;
 }
 
 sub gen_doc_section_description {
     my ($self) = @_;
 
-    $self->{_res}{description} = $self->{_meta} ?
-        $self->langprop($self->{_meta}, "description") : undef;
+    $self->{_doc_res}{description} = $self->{_doc_meta} ?
+        $self->langprop($self->{_doc_meta}, "description") : undef;
 }
 
 sub gen_doc_section_arguments {
     my ($self) = @_;
-    my $meta  = $self->{_meta};
-    my $ometa = $self->{_orig_meta};
+    my $meta  = $self->{_doc_meta};
+    my $ometa = $self->{_doc_orig_meta};
 
     # perl term for args, whether '%args' or '@args' etc
     my $aa = $ometa->{args_as} // $meta->{args_as} // 'hash';
@@ -138,11 +138,11 @@ sub gen_doc_section_arguments {
     } else {
         die "BUG: Unknown value of args_as '$aa'";
     }
-    $self->{_res}{args_plterm} = $aplt;
+    $self->{_doc_res}{args_plterm} = $aplt;
 
     my $args  = $meta->{args} // {};
-    $self->{_res}{args} = {};
-    my $raa = $self->{_res}{args};
+    $self->{_doc_res}{args} = {};
+    my $raa = $self->{_doc_res}{args};
     for my $name (keys %$args) {
         my $arg = $args->{$name};
         $arg->{default_lang} //= $meta->{default_lang};
@@ -164,9 +164,9 @@ sub gen_doc_section_arguments {
 sub gen_doc_section_result {
     my ($self) = @_;
 
-    my $meta  = $self->{_meta};
-    my $ometa = $self->{_orig_meta};
-    my $res   = $self->{_res};
+    my $meta  = $self->{_doc_meta};
+    my $ometa = $self->{_doc_orig_meta};
+    my $res   = $self->{_doc_res};
 
     $res->{res_schema} = $meta->{result} ? $meta->{result}{schema} : undef;
     $res->{res_schema} //= [any => {}];

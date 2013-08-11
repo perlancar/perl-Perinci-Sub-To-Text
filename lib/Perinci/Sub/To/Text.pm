@@ -18,9 +18,9 @@ sub BUILD {
 sub after_gen_doc {
     my ($self) = @_;
 
-    my $res   = $self->{_res};
-    my $meta  = $self->{_meta};
-    my $ometa = $self->{_orig_meta};
+    my $res   = $self->{_doc_res};
+    my $meta  = $self->{_doc_meta};
+    my $ometa = $self->{_doc_orig_meta};
 
     $self->add_doc_lines(
         "+ " . $res->{name} . $res->{args_plterm} . ' -> ' . $res->{human_ret},
