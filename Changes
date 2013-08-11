@@ -1,19 +1,23 @@
 Revision history for Perinci-Sub-To-Text
 
+0.23     2013-08-11 (SHARYANTO)
+
+         - No functional changes. Update log statement.
+
+
 0.22     2013-08-05 (SHARYANTO)
 
-         Fix a small bug.
+         - Fix a small bug.
 
 
 0.21     2013-07-26 (SHARYANTO)
 
-         Fix a small bug.
+         - Fix a small bug.
 
 
 0.20     2013-07-26 (SHARYANTO)
 
-         First release. Extracted from Perinci-To-Text to allow generating
-         documentation for a specific function only (and not the whole package).
-         Version number starts from 0.20 because some modules are moved here.
-
-
+         - First release. Extracted from Perinci-To-Text to allow generating
+           documentation for a specific function only (and not the whole
+           package). Version number starts from 0.20 because some modules are
+           moved here.
