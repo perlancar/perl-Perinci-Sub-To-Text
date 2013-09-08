@@ -94,7 +94,7 @@ sub after_gen_doc {
 
  use Perinci::Sub::To::Text;
 
- my $doc = Perinci::Sub::To::Text->new(url => "/Some/Module/somefunc");
+ my $doc = Perinci::Sub::To::Text->new(url => "pl:/Some/Module/somefunc");
  say $doc->gen_doc;
 
 You can also try the L<peri-func-doc> script (included in the

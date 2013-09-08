@@ -25,7 +25,7 @@ has _pa => (
                 validate_args => 0,
             },
         );
-        $pa->{handlers}{pl} = $pai;
+        $pa->{handlers}{pl} = $pap;
         delete $pa->{handlers}{''};
         $pa;
     },
