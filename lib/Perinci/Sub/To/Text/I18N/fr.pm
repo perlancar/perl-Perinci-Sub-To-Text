@@ -1,3 +1,5 @@
+use utf8;
+
 package Perinci::Sub::To::Text::I18N::fr;
 use parent qw(Perinci::Sub::To::Text::I18N Perinci::Sub::To::FuncBase::I18N::fr);
 

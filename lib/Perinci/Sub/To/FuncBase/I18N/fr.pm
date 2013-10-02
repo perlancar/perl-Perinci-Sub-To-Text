@@ -1,3 +1,5 @@
+use utf8;
+
 package Perinci::Sub::To::FuncBase::I18N::fr;
 use base 'Perinci::Sub::To::FuncBase::I18N';
 
