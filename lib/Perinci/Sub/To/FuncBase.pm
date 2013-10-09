@@ -101,7 +101,7 @@ sub gen_doc_section_summary {
     my $summary = "";
     if ($self->{_doc_meta}) {
         $name    = $self->langprop($self->{_doc_meta}, "name");
-        $summary = $self->langprop($self->{_doc_fmeta}, "summary");
+        $summary = $self->langprop($self->{_doc_meta}, "summary");
     }
     $name //= do {
         my $fname = $self->{url};
