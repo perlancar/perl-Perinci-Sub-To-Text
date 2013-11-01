@@ -18,18 +18,17 @@ sub BUILD {
 sub after_gen_doc {
     my ($self) = @_;
 
-    my $res   = $self->{_doc_res};
-    my $meta  = $self->{_doc_meta};
-    my $ometa = $self->{_doc_orig_meta};
+    my $meta  = $self->meta;
+    my $dres  = $self->{_doc_res};
 
     $self->add_doc_lines(
-        "+ " . $res->{name} . $res->{args_plterm} . ' -> ' . $res->{human_ret},
+        "+ ".$dres->{name}.$dres->{args_plterm}.' -> '.$dres->{human_ret},
     );
     $self->inc_doc_indent;
 
-    $self->add_doc_lines("", $res->{summary}) if $res->{summary};
-    $self->add_doc_lines("", $res->{description}) if $res->{description};
-    if (keys %{$res->{args}}) {
+    $self->add_doc_lines("", $dres->{summary})     if $dres->{summary};
+    $self->add_doc_lines("", $dres->{description}) if $dres->{description};
+    if (keys %{$dres->{args}}) {
         $self->add_doc_lines(
             "",
             $self->loc("Arguments") .
@@ -37,10 +36,10 @@ sub after_gen_doc {
             "");
         my $i = 0;
         my $arg_has_ct;
-        for my $name (sort keys %{$res->{args}}) {
+        for my $name (sort keys %{$dres->{args}}) {
             my $prev_arg_has_ct = $arg_has_ct;
             $arg_has_ct = 0;
-            my $ra = $res->{args}{$name};
+            my $ra = $dres->{args}{$name};
             $self->add_doc_lines("") if $i++ > 0 && $prev_arg_has_ct;
             $self->add_doc_lines(join(
                 "",
@@ -69,7 +68,7 @@ sub after_gen_doc {
 
     $self->add_doc_lines("", $self->loc("Return value") . ':');
     $self->inc_doc_indent;
-    my $rn = $ometa->{result_naked} // $meta->{result_naked};
+    my $rn = $meta->{result_naked};
     $self->add_doc_lines($self->loc(join(
         "",
         "Returns an enveloped result (an array). ",
@@ -94,7 +93,7 @@ sub after_gen_doc {
 
  use Perinci::Sub::To::Text;
 
- my $doc = Perinci::Sub::To::Text->new(url => "pl:/Some/Module/somefunc");
+ my $doc = Perinci::Sub::To::Text->new(meta => {...});
  say $doc->gen_doc;
 
 You can also try the L<peri-func-doc> script (included in the
