@@ -1,5 +1,14 @@
 Revision history for Perinci-Sub-To-Text
 
+0.28     2013-11-01 (SHARYANTO)
+
+         [INCOMPATIBLE CHANGES]
+
+         - Instead of accepting 'url' (use Riap), now accept 'name' and 'meta'.
+           This decouples the module from using Riap and make the module more
+           reusable. This change is motivated by writing App-riap.
+
+
 0.27     2013-10-02 (SHARYANTO)
 
          - No functional change. Forgot to add 'use utf8'.
