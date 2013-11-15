@@ -112,7 +112,9 @@ sub gen_doc_section_arguments {
         my $s = $arg->{schema};
         my $ra = $raa->{$name} = {schema=>$s};
         $ra->{human_arg} = Perinci::ToUtil::sah2human_short($s);
-        if (defined $s->[1]{default}) {
+        if (exists $arg->{default}) {
+            $ra->{human_arg_default} = dump1($arg->{default});
+        } elsif (defined $s->[1]{default}) {
             $ra->{human_arg_default} = dump1($s->[1]{default});
         }
         $ra->{summary}     = $self->langprop($arg, 'summary');
