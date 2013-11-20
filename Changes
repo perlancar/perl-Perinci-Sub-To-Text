@@ -1,5 +1,11 @@
 Revision history for Perinci-Sub-To-Text
 
+0.30     2013-11-20 (SHARYANTO)
+
+         - No functional changes. Change 'sort uniq(...)' to 'sort(uniq(...))'
+           for newer perls.
+
+
 0.29     2013-11-16 (SHARYANTO)
 
          - Observe arg spec's 'default' property (Rinci 1.1.42).
