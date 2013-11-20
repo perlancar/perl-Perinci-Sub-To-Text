@@ -18,7 +18,7 @@ sub sah2human_short {
         my @alts    = map {Data::Sah::normalize_schema($_)}
             @{$s->[1]{of} // []};
         my @types   = map {$_->[0]} @alts;
-        @types      = sort List::MoreUtils::uniq(@types);
+        @types      = sort(List::MoreUtils::uniq(@types));
         return join("|", @types) || 'any';
     } else {
         return $s->[0];
