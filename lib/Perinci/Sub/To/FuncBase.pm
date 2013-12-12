@@ -8,8 +8,6 @@ use Perinci::Object;
 use Perinci::ToUtil;
 
 with 'SHARYANTO::Role::Doc::Section';
-with 'SHARYANTO::Role::I18N';
-with 'SHARYANTO::Role::I18NRinci';
 
 has meta => (is=>'rw');
 has name => (is=>'rw');
@@ -60,12 +58,12 @@ sub add_doc_lines {
 sub gen_doc_section_summary {
     my ($self) = @_;
 
-    my $meta = $self->meta;
-    my $dres = $self->{_doc_res};
+    my $rimeta = rimeta($self->meta);
+    my $dres   = $self->{_doc_res};
 
-    my $name = $self->name // $self->langprop($meta, "name") //
+    my $name = $self->name // $rimeta->langprop("name") //
         "unnamed_function";
-    my $summary = $self->langprop($meta, "summary");
+    my $summary = $rimeta->langprop("summary");
 
     $dres->{name}    = $name;
     $dres->{summary} = $summary;
@@ -74,17 +72,18 @@ sub gen_doc_section_summary {
 sub gen_doc_section_description {
     my ($self) = @_;
 
-    my $meta = $self->meta;
-    my $dres = $self->{_doc_res};
+    my $rimeta = rimeta($self->meta);
+    my $dres   = $self->{_doc_res};
 
-    $dres->{description} = $self->langprop($meta, "description");
+    $dres->{description} = $rimeta->langprop("description");
 }
 
 sub gen_doc_section_arguments {
     my ($self) = @_;
 
-    my $meta = $self->meta;
-    my $dres = $self->{_doc_res};
+    my $meta   = $self->meta;
+    my $rimeta = rimeta($meta);
+    my $dres   = $self->{_doc_res};
 
     # perl term for args, whether '%args' or '@args' etc
     my $aa = $meta->{args_as} // 'hash';
@@ -117,8 +116,8 @@ sub gen_doc_section_arguments {
         } elsif (defined $s->[1]{default}) {
             $ra->{human_arg_default} = dump1($s->[1]{default});
         }
-        $ra->{summary}     = $self->langprop($arg, 'summary');
-        $ra->{description} = $self->langprop($arg, 'description');
+        $ra->{summary}     = $rimeta->langprop('summary');
+        $ra->{description} = $rimeta->langprop('description');
         $ra->{arg}         = $arg;
 
         $raa->{$name} = $ra;
@@ -128,8 +127,9 @@ sub gen_doc_section_arguments {
 sub gen_doc_section_result {
     my ($self) = @_;
 
-    my $meta = $self->meta;
-    my $dres = $self->{_doc_res};
+    my $meta   = $self->meta;
+    my $rimeta = rimeta($meta->{result});
+    my $dres   = $self->{_doc_res};
 
     $dres->{res_schema} = $meta->{result} ? $meta->{result}{schema} : undef;
     $dres->{res_schema} //= [any => {}];
@@ -142,8 +142,8 @@ sub gen_doc_section_result {
         $dres->{human_ret} = '[status, msg, result, meta]';
     }
 
-    $dres->{res_summary}     = $self->langprop($meta->{result}, "summary");
-    $dres->{res_description} = $self->langprop($meta->{result}, "description");
+    $dres->{res_summary}     = $rimeta->langprop("summary");
+    $dres->{res_description} = $rimeta->langprop("description");
 }
 
 sub gen_doc_section_examples {

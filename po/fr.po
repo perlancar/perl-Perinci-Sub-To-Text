@@ -1,0 +1,58 @@
+# French translations for Perinci-Sub-To-Text package.
+# Copyright (C) 2013 Steven Haryanto
+# This file is distributed under the same license as the Perinci-Sub-To-Text package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Perinci-Sub-To-Text 0.30\n"
+"Report-Msgid-Bugs-To: stevenharyanto@gmail.com\n"
+"POT-Creation-Date: 2013-12-12 12:31+0700\n"
+"PO-Revision-Date: 2013-12-12 12:31+0700\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: lib/Perinci/Sub/To/Text.pm:36
+msgid "Arguments"
+msgstr "Arguments"
+
+#: lib/Perinci/Sub/To/Text.pm:37
+msgid "'*' denotes required arguments"
+msgstr "'*' désigne arguments nécessaires"
+
+#: lib/Perinci/Sub/To/Text.pm:51
+msgid "default"
+msgstr "défaut"
+
+#: lib/Perinci/Sub/To/Text.pm:67
+msgid "This function dies on error."
+msgstr "Cette fonction meurt en cas d'erreur."
+
+#: lib/Perinci/Sub/To/Text.pm:70
+msgid "Return value"
+msgstr "Valeur de retour"
+
+#: lib/Perinci/Sub/To/Text.pm:74
+msgid ""
+"Returns an enveloped result (an array).\n"
+"\n"
+"First element (status) is an integer containing HTTP status code\n"
+"(200 means OK, 4xx caller error, 5xx function error). Second element\n"
+"(msg) is a string containing error message, or 'OK' if status is\n"
+"200. Third element (result) is optional, the actual result. Fourth\n"
+"element (meta) is called result metadata and is optional, a hash\n"
+"that contains extra information."
+msgstr ""
+"Retourner un résultat enveloppé (un tableau).\n"
+"\n"
+"Premier élément (status) est un entier contenant le code d'état HTTP\n"
+"(200 moyens OK, erreur de l'appelant 4xx, erreur de fonction 5xx). Second élément\n"
+"(msg) est un message d'erreur contenant des cordes, ou 'OK' si l'état est\n"
+"de 200. Troisième élément (résultat) est facultative, le résultat réel. Quatrième\n"
+"élément (méta) est appelée méta-données du résultat et est facultatif, un hachage\n"
+"qui contient des informations supplémentaires."

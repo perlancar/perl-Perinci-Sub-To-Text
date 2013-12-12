@@ -4,6 +4,8 @@ use 5.010001;
 use Log::Any '$log';
 use Moo;
 
+use Locale::TextDomain 'Perinci-Sub-To-Text';
+
 extends 'Perinci::Sub::To::FuncBase';
 with    'SHARYANTO::Role::Doc::Section::AddTextLines';
 
@@ -31,8 +33,8 @@ sub after_gen_doc {
     if (keys %{$dres->{args}}) {
         $self->add_doc_lines(
             "",
-            $self->loc("Arguments") .
-                ' (' . $self->loc("'*' denotes required arguments") . '):',
+            __("Arguments") .
+                ' (' . __("'*' denotes required arguments") . '):',
             "");
         my $i = 0;
         my $arg_has_ct;
@@ -46,7 +48,7 @@ sub after_gen_doc {
                 "- ", $name, ($ra->{arg}{req} ? '*' : ''), ' => ',
                 $ra->{human_arg},
                 (defined($ra->{human_arg_default}) ?
-                     " (" . $self->loc("default") .
+                     " (" . __("default") .
                          ": $ra->{human_arg_default})" : "")
             ));
             if ($ra->{summary} || $ra->{description}) {
@@ -62,22 +64,21 @@ sub after_gen_doc {
     }
 
     if ($meta->{dies_on_error}) {
-        $self->add_doc_lines("", $self->loc(
-            "This function dies on error."), "");
+        $self->add_doc_lines("", __("This function dies on error."), "");
     }
 
-    $self->add_doc_lines("", $self->loc("Return value") . ':');
+    $self->add_doc_lines("", __("Return value") . ':');
     $self->inc_doc_indent;
     my $rn = $meta->{result_naked};
-    $self->add_doc_lines($self->loc(join(
-        "",
-        "Returns an enveloped result (an array). ",
-        "First element (status) is an integer containing HTTP status code ",
-        "(200 means OK, 4xx caller error, 5xx function error). Second element ",
-        "(msg) is a string containing error message, or 'OK' if status is ",
-        "200. Third element (result) is optional, the actual result. Fourth ",
-        "element (meta) is called result metadata and is optional, a hash ",
-        "that contains extra information.")))
+    $self->add_doc_lines(__(
+"Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information."))
         unless $rn;
     $self->dec_doc_indent;
 
